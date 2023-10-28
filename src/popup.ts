@@ -1,8 +1,3 @@
-import { HELLO } from './constants.js';
-
-const $body = document.querySelector('body');
-const $p = document.createElement('p');
-$p.innerHTML = `${HELLO} Popup`;
-if ($body) {
-  $body.appendChild($p);
-}
+document.getElementById('exportButton')?.addEventListener('click', () => {
+  chrome.runtime.sendMessage({ action: 'exportLogs' });
+});
