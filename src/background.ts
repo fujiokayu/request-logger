@@ -1,7 +1,12 @@
 import { saveLog, exportLogs } from './logUtils';
 
+let currentFilter = "";
+
 chrome.webRequest.onBeforeRequest.addListener(
   (details: chrome.webRequest.WebRequestBodyDetails) => {
+    if (currentFilter && !details.url.includes(currentFilter)) {
+      return; // フィルタに一致しないURLの場合、処理を終了
+    }
     console.log("Request Method:", details.method);
     console.log("Request URL:", details.url);
 
@@ -36,9 +41,12 @@ chrome.webRequest.onBeforeRequest.addListener(
   ["requestBody"]
 );
 
-chrome.runtime.onMessage.addListener((message, _, __) => {
-  if (message.action === 'exportLogs') {
-      exportLogs(); // 以前に定義したexportLogs関数を呼び出します
+chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
+  if (message.action === 'setFilter') {
+    console.log("setFilter:", message.filter);
+    currentFilter = message.filter;
+    sendResponse({ message: "Filter set successfully!" });
+  } else if (message.action === 'exportLogs') {
+    exportLogs();
   }
 });
-
