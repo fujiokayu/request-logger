@@ -6,7 +6,7 @@ interface Log {
 }
 
 export const saveLog = (logEntry: string) => {
-  const timestamp = Date.now(); // タイムスタンプを数値として取得
+  const timestamp = Date.now(); // Get the timestamp as a number
   chrome.storage.local.set({ [timestamp]: logEntry }, () => {
       console.log("Log saved with timestamp:", timestamp);
   });
@@ -16,8 +16,8 @@ export const getAllLogs = (): Promise<Log[]> => {
   return new Promise((resolve) => {
     chrome.storage.local.get(null, (result) => {
       const pathFilter = result.pathFilter || "";
-      
-      const allEntries = Object.entries(result).filter(([key, _]) => !isNaN(Number(key))); // keyが数値であることを確認
+      const allEntries = Object.entries(result).filter(([key, _]) => !isNaN(Number(key))); // Verify that the key is a number
+
       let logs: Log[] = allEntries.map(([timestamp, entry]) => {
         const ts = !isNaN(+timestamp) ? +timestamp : new Date(timestamp).getTime();
         const matchedURL = entry.toString().match(/Request URL: (.*?)\n/);

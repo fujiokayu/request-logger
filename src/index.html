@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Log Exporter</title>
-        <style>
-            /* 必要なスタイリングをここに追加 */
-            body {
-                width: 200px; /* このサイズは調整可能です */
-            }
-        </style>
-    </head>
-    <body>
-        <button id="exportButton">Export Log</button>
-        <script type="module" src="popup.ts"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Exporter</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>request logger</h1>
+        
+        <div class="section switch-section">
+            <label for="recordingToggle">Record Logs:</label>
+            <div class="switch">
+                <input type="checkbox" id="recordingToggle">
+                <label for="recordingToggle" class="slider"></label>
+            </div>
+        </div>
+
+        <div class="section">
+            <button id="exportButton" class="btn">Export Log</button>
+        </div>
+
         <div class="filter-section">
             <h3>Filter Settings</h3>
-            <label for="pathFilter">Path Filter:</label>
-            <input type="text" id="pathFilter" placeholder="e.g. example.com/path/to/resource">
-                    
-            <button id="save-filter-settings">Save Settings</button>
+            <div class="filter-input">
+                <label for="pathFilter">Path Filter:</label>
+                <input type="text" id="pathFilter" placeholder="e.g. example.com/path/to/resource">
+            </div>
+        
+            <button id="save-path-filter">Save Path Filter</button>
         </div>
-        <button id="clearStorage">Clear Storage</button>
-    </body>
+                
+        <div class="section">
+            <button id="clearStorage" class="btn">Clear Storage</button>
+        </div>
+
+    </div>
+    <script type="module" src="popup.ts"></script>
+</body>
+
 </html>
