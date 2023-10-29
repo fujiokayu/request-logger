@@ -1,8 +1,16 @@
-import { HELLO } from './constants.js';
+console.log('popup script loaded')
 
-const $body = document.querySelector('body');
-const $p = document.createElement('p');
-$p.innerHTML = `${HELLO} Popup`;
-if ($body) {
-  $body.appendChild($p);
-}
+document.getElementById('save-filter-settings')?.addEventListener('click', () => {
+  const pathFilter = (document.getElementById('pathFilter') as HTMLInputElement).value;
+
+  chrome.storage.local.set({
+      pathFilter: pathFilter
+  }, () => {
+      console.log("popup.ts: Filter settings saved: ", pathFilter);
+      chrome.runtime.sendMessage({ action: 'setFilter', filter: pathFilter });
+  });
+});
+
+document.getElementById('exportButton')?.addEventListener('click', () => {
+  chrome.runtime.sendMessage({ action: 'exportLogs' });
+});

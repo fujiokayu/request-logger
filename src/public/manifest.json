@@ -1,20 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "Sample Extensions",
-  "description": "Base Level Extension",
+  "name": "request logger",
+  "description": "Logs the URL and request body of HTTP requests",
   "version": "1.0",
+  "permissions": [
+    "webRequest",
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "index.html",
     "default_icon": "cat.ico"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "css": [ "content_styles.css" ],
-      "js": [ "content_scripts.js" ]
-    }
-  ]
+  }
 }

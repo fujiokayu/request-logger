@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/typescript/bin/tsc && vite build && vite build --config=vite.config.content_scripts.js",
+    "build": "./node_modules/typescript/bin/tsc && vite build",
     "watch": "webpack -w"
   },
   "keywords": [],
