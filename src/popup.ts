@@ -1,5 +1,3 @@
-console.log('popup script loaded')
-
 document.getElementById('save-filter-settings')?.addEventListener('click', () => {
   const pathFilter = (document.getElementById('pathFilter') as HTMLInputElement).value;
 
@@ -13,4 +11,15 @@ document.getElementById('save-filter-settings')?.addEventListener('click', () =>
 
 document.getElementById('exportButton')?.addEventListener('click', () => {
   chrome.runtime.sendMessage({ action: 'exportLogs' });
+});
+
+document.getElementById('clearStorage')?.addEventListener('click', () => {
+  chrome.storage.local.clear(() => {
+      const error = chrome.runtime.lastError;
+      if (error) {
+          console.error(error);
+      } else {
+          console.log('Storage cleared successfully!');
+      }
+  });
 });
