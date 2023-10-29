@@ -17,15 +17,5 @@
   "action": {
     "default_popup": "index.html",
     "default_icon": "cat.ico"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "css": [ "content_styles.css" ],
-      "js": [ "content_scripts.js" ]
-    }
-  ]
+  }
 }
